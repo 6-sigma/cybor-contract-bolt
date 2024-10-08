@@ -1,0 +1,52 @@
+[toolchain]
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.localnet]
+attack = "68LB1xwpQKPDp3pYKYdMhLYjAbTqap6cuzwxUfVhGDro"
+cybor = "DBeSFRbEdviC1VM4dRWMsugypV8D2PoytgSAodKWKKa8"
+cybor_contract_bolt = "8nsznYpJoCjvtHBB7E1tYrssTXj79zYrKfFGZydZ23FJ"
+cybor_enemy = "GCybkxtWw7WF7NCWkgoLoqRqfX7GUCSF99rQA3xDeLN2"
+cybor_fight = "Ez1aqXdP6YG9JnYvMp8rHuzBAysGzXmhwaE55x7VoGNw"
+cybor_info = "4GgsADCpvpBZvJkTLnqsmSvPbcKirzeRUvw7zGJLk3Gm"
+cybor_mint = "5BeHWrGiqHNfTggNxRAJ6M7ecoDjJgjHAZ3YwArjBBDG"
+cybor_owned = "BmnWUykh35Z99Jz4dSpMBNEF69dsc3rWNSYanJQ59BuZ"
+cybor_upgrade = "J8AV28cNjdovGC9NDpPmuFmSgkr9XQQvEzz8KivBFwcA"
+enemy = "AyGTcPj9nJZP7McB16S7Uuz5qc14ApBQSUb5q7QHGaoj"
+movement = "A9By1Ue6wckrfyHtSEn41uBrJwcMjNyiVRtk7Cst6fZN"
+position = "g1SjuZEWGGihALDnvJSNJ7E5tY8tZWcEzSJv82mS2Bk"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+[workspace]
+members = ["programs/*", "programs-ecs/components/*", "programs-ecs/systems/*"]
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[test]
+startup_wait = 5000
+shutdown_wait = 2000
+upgradeable = false
+
+[[test.genesis]]
+address = "WorLD15A7CrDwLcLy4fRqtaTb9fbd8o8iqiEMUDse2n"
+program = "tests/fixtures/world.so"
+upgradeable = false
+
+[test.validator]
+bind_address = "0.0.0.0"
+url = "https://rpc.magicblock.app/devnet/"
+ledger = ".bolt/test-ledger"
+rpc_port = 8899
+
+[[test.validator.account]]
+address = "EHLkWwAT9oebVv9ht3mtqrvHhRVMKrt54tF3MfHTey2K"
+filename = "tests/fixtures/registry.json"
